@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  nest:
+    build: ./nest
+    container_name: nest
+    command: npm run start:dev
+    restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=editorium.net
+      - LETSENCRYPT_HOST=editorium.net
+    expose:
+      - 80
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
