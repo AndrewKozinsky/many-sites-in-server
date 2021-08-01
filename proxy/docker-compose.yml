@@ -11,9 +11,12 @@ services:
       - letsencrypt-certs:/etc/nginx/certs
       - letsencrypt-vhost-d:/etc/nginx/vhost.d
       - letsencrypt-html:/usr/share/nginx/html
+
   letsencrypt-proxy:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: letsencrypt-proxy
+    depends_on:
+      - nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - letsencrypt-certs:/etc/nginx/certs
